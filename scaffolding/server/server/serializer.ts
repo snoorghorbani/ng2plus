@@ -77,6 +77,15 @@ export class Serializer {
                 return this.extractNumericLiteral(<ts.NumericLiteral>node);
             case ts.SyntaxKind.MethodDeclaration:
                 return this.extractMethodDeclaration(<ts.MethodDeclaration>node);
+            case ts.SyntaxKind.Parameter:
+                return this.extractParameterDeclaration(<ts.ParameterDeclaration>node);
+            case ts.SyntaxKind.Decorator:
+                return this.extractDecorator(<ts.Decorator>node);
+            case ts.SyntaxKind.StringKeyword:
+                return this.extractKeywordTypeNode(<ts.KeywordTypeNode>node);
+            case ts.SyntaxKind.NumberKeyword:
+                return this.extractKeywordTypeNode(<ts.KeywordTypeNode>node);
+
             default:
                 debugger
         }
@@ -98,14 +107,32 @@ export class Serializer {
         //     value: this[methodName](node)
         // }
     }
-    extractMethodDeclaration(node :ts.MethodDeclaration): I.MethodDeclaration {
-        return{
-           kind:ts.SyntaxKind.MethodDeclaration,
-           flags:node.flags,
-           name:node.name,
-           decorators:node.decorators,
-           parameters:node.parameters
+    extractKeywordTypeNode(node): I.KeywordTypeNode {
+        return {
+            flags: node.flags,
+            kind: node.kind
+        }
     }
+    extractMethodDeclaration(node: ts.MethodDeclaration): I.MethodDeclaration {
+        return {
+            kind: node.kind,
+            flags: node.flags,
+            name: {
+                text: node.name.getText()
+            },
+            parameters: node.parameters.map(parameterNode => <I.Expression>this.extractByNodeKind(parameterNode)),
+            decorators: (!node.decorators) ? [] : node.decorators.map(decoratorNode => <I.Decorator>this.extractByNodeKind(decoratorNode))
+        }
+    }
+    extractParameterDeclaration(node: ts.ParameterDeclaration): I.ParameterDecleration {
+        return {
+            kind: node.kind,
+            flags: node.flags,
+            name: {
+                text: node.name.getText()
+            },
+            type: this.extractByNodeKind(node.type)
+        }
     }
     extractIdentifier(node: ts.Identifier): I.Identifier {
         return {
@@ -145,7 +172,7 @@ export class Serializer {
             type: serializedClass.type,
             constructors: serializedClass.constructors,
             documentation: serializedClass.documentation,
-            decorators: node.decorators.map(decoratorNode => this.extractDecorator(decoratorNode))
+            decorators: node.decorators.map(decoratorNode => <I.Decorator>this.extractDecorator(decoratorNode))
         };
     }
     extractDecorator(decoratorNode): I.Decorator {
@@ -187,7 +214,7 @@ export class Serializer {
             name: {
                 text: propertyNodeItem.name.getText()
             },
-            initializer: this.extractByNodeKind(propertyNodeItem.initializer)
+            initializer: <I.Expression>this.extractByNodeKind(propertyNodeItem.initializer)
         }
     }
     extractNumericLiteral(node: ts.NumericLiteral): I.NumericLiteralDecleration {
@@ -201,12 +228,7 @@ export class Serializer {
         return {
             kind: node.kind,
             flags: node.flags,
-            parameters: node.parameters.map(paramNode => {
-                return {
-                    kind: paramNode.kind,
-                    flags: paramNode.flags,
-                }
-            })
+            parameters: node.parameters.map(paramNode => <I.ParameterDecleration>this.extractByNodeKind(paramNode))
         }
     }
     extractArrayLiteralExpression(node: ts.ArrayLiteralExpression): I.ArrayLiteralExpression {
@@ -214,7 +236,7 @@ export class Serializer {
             kind: node.kind,
             flags: node.flags,
             // multiLine: node.multiLine,
-            elements: node.elements.map(member => this.extractByNodeKind(member))
+            elements: node.elements.map(member => <I.Expression>this.extractByNodeKind(member))
         }
     }
     serializeSymbol(symbol: ts.Symbol): I.DocEntry {

@@ -71,6 +71,14 @@ var Serializer = (function () {
                 return this.extractNumericLiteral(node);
             case ts.SyntaxKind.MethodDeclaration:
                 return this.extractMethodDeclaration(node);
+            case ts.SyntaxKind.Parameter:
+                return this.extractParameterDeclaration(node);
+            case ts.SyntaxKind.Decorator:
+                return this.extractDecorator(node);
+            case ts.SyntaxKind.StringKeyword:
+                return this.extractKeywordTypeNode(node);
+            case ts.SyntaxKind.NumberKeyword:
+                return this.extractKeywordTypeNode(node);
             default:
                 debugger;
         }
@@ -91,13 +99,32 @@ var Serializer = (function () {
         //     value: this[methodName](node)
         // }
     };
-    Serializer.prototype.extractMethodDeclaration = function (node) {
+    Serializer.prototype.extractKeywordTypeNode = function (node) {
         return {
-            kind: ts.SyntaxKind.MethodDeclaration,
             flags: node.flags,
-            name: node.name,
-            decorators: node.decorators,
-            parameters: node.parameters
+            kind: node.kind
+        };
+    };
+    Serializer.prototype.extractMethodDeclaration = function (node) {
+        var _this = this;
+        return {
+            kind: node.kind,
+            flags: node.flags,
+            name: {
+                text: node.name.getText()
+            },
+            parameters: node.parameters.map(function (parameterNode) { return _this.extractByNodeKind(parameterNode); }),
+            decorators: (!node.decorators) ? [] : node.decorators.map(function (decoratorNode) { return _this.extractByNodeKind(decoratorNode); })
+        };
+    };
+    Serializer.prototype.extractParameterDeclaration = function (node) {
+        return {
+            kind: node.kind,
+            flags: node.flags,
+            name: {
+                text: node.name.getText()
+            },
+            type: this.extractByNodeKind(node.type)
         };
     };
     Serializer.prototype.extractIdentifier = function (node) {
@@ -191,15 +218,11 @@ var Serializer = (function () {
         };
     };
     Serializer.prototype.extractConstructor = function (node) {
+        var _this = this;
         return {
             kind: node.kind,
             flags: node.flags,
-            parameters: node.parameters.map(function (paramNode) {
-                return {
-                    kind: paramNode.kind,
-                    flags: paramNode.flags
-                };
-            })
+            parameters: node.parameters.map(function (paramNode) { return _this.extractByNodeKind(paramNode); })
         };
     };
     Serializer.prototype.extractArrayLiteralExpression = function (node) {

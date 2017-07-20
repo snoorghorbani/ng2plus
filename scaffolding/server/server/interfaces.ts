@@ -24,6 +24,7 @@ export interface Node {
     kind: ts.SyntaxKind,
     flags: ts.NodeFlags,
 }
+export interface Token extends Node { }
 export interface Import extends Node {
     moduleSpecifier: string,
     importClauses: importClause[]
@@ -36,12 +37,14 @@ export interface Class extends Node {
     documentation: string;
     decorators: Decorator[]
 }
-export interface Parameter extends Node {
-
+export interface ParameterDecleration extends Node {
+    name: Name;
+    type: Token;
 }
 export interface TextRange { }
+export type Expression = ObjectLiteralExpression | ArrayLiteralExpression | Identifier | DecoratorExpression | ParameterDecleration;
 export interface Constructor extends Node {
-    parameters: Parameter[];
+    parameters: ParameterDecleration[];
 }
 export interface Initializer extends Node {
     // multiLine: boolean;
@@ -73,7 +76,6 @@ export interface DecoratorExpression {
         arguments: Expression[];
     }
 }
-export type Expression = ObjectLiteralExpression | ArrayLiteralExpression | Identifier | DecoratorExpression;
 export interface Decorator extends Node {
     expression: Expression;
 }
@@ -85,3 +87,7 @@ export interface MethodDeclaration extends Node {
     parameters: Expression[],
     decorators: Decorator[]
 }
+export interface KeywordTypeNode extends Node {
+
+}
+export type ClassElement = Constructor | PropertyDecleration | MethodDeclaration;

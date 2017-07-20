@@ -64,6 +64,77 @@ export var createDecorator = function ({ decorator }) {
         })
     )
 }
+export var createParameter = function (
+    { decorators = undefined, modifiers = undefined, dotDotDotToken = undefined, name = undefined, questionToken = undefined, type = undefined, initializer = undefined }
+        : { decorators: any, modifiers: any, dotDotDotToken: any, name: any, questionToken?: any, type?: any, initializer?: any }
+) {
+    return ts.createParameter(decorators, modifiers, dotDotDotToken, name, questionToken, type, initializer);
+}
+export var createClassElements = function (members: I.ClassElement[]) {
+    return members.map(member => {
+        switch (member.kind) {
+            case ts.SyntaxKind.Constructor:
+                debugger
+                return createConstructor({
+                    decorators: undefined,
+                    modifiers: undefined,
+                    parameters: (<I.Constructor>member).parameters.map(param => createParameter({
+                        decorators: undefined,
+                        modifiers: undefined,
+                        dotDotDotToken: undefined,
+                        name: param.name.text,
+                        type: ts.createKeywordTypeNode((param.type as ts.KeywordTypeNode).kind)
+
+                    })),
+                    body: undefined,
+                });
+            case ts.SyntaxKind.PropertyDeclaration:
+                return createProperty({
+                    decorators: undefined,
+                    modifiers: undefined,
+                    name: undefined,
+                    questionToken: undefined,
+                    type: undefined,
+                    initializer: undefined,
+                })
+            case ts.SyntaxKind.MethodDeclaration:
+                return createMethod({
+                    decorators: undefined,
+                    modifiers: undefined,
+                    asteriskToken: undefined,
+                    name: undefined,
+                    questionToken: undefined,
+                    typeParameters: undefined,
+                    Parameters: undefined,
+                    type: undefined,
+                    body: undefined
+                })
+        }
+    })
+}
+export var createConstructor = function ({
+     decorators = undefined, modifiers = undefined, parameters = undefined, body = undefined }
+    : { decorators: any, modifiers: any, parameters: any, body: undefined }
+) {
+    return ts.createConstructor(decorators, modifiers, parameters, body);
+}
+export var createProperty = function ({ decorators = undefined, modifiers = undefined, name = undefined, questionToken = undefined, type = undefined, initializer = undefined }) {
+    return ts.createProperty(decorators, modifiers, name, questionToken, type, initializer);
+}
+export var createMethod = function ({ decorators = undefined, modifiers = undefined, asteriskToken = undefined, name = undefined, questionToken = undefined, typeParameters = undefined, Parameters = undefined, type = undefined, body = undefined }) {
+    return ts.createMethod(decorators, modifiers, asteriskToken, name, questionToken, typeParameters, Parameters, type, body);
+}
+export var createClassElement = function ({ }) {
+    debugger
+}
 export var createClass = function ({ decorators, name, modifiers, typeParameters = undefined, heritageClauses = undefined, members = undefined }) {
-    return ts.createClassDeclaration(decorators, modifiers, name, typeParameters /*[ts.createTypeParameterDeclaration("testParameter", )]*/, undefined, undefined);
+    debugger
+    return ts.createClassDeclaration(
+        decorators,
+        modifiers,
+        name,
+        typeParameters /*[ts.createTypeParameterDeclaration("testParameter", )]*/,
+        heritageClauses,
+        members
+    );
 }

@@ -12,7 +12,7 @@ var Serializer = (function () {
         this.program = ts.createProgram([filePath], options);
         // Get the checker, we will use it to find more about classes
         this.checker = this.program.getTypeChecker();
-        this.sourceFile = this.program.getSourceFiles().pop();
+        this.sourceFile = this.program.getSourceFiles().find(function (i) { return i.fileName.includes('test.ts'); });
     }
     Serializer.prototype.visitAllNode = function () {
         var _this = this;
@@ -116,7 +116,6 @@ var Serializer = (function () {
         var _this = this;
         var symbol = this.checker.getSymbolAtLocation(node.name);
         var serializedClass = this.serializeClass(symbol);
-        debugger;
         return {
             name: symbol.name,
             kind: node.kind,
@@ -164,9 +163,6 @@ var Serializer = (function () {
         };
     };
     Serializer.prototype.extractPropertyDeclaration = function (propertyNodeItem) {
-        if (!propertyNodeItem.initializer)
-            debugger;
-        debugger;
         return {
             kind: propertyNodeItem.kind,
             flags: propertyNodeItem.flags,
@@ -197,7 +193,6 @@ var Serializer = (function () {
     };
     Serializer.prototype.extractArrayLiteralExpression = function (node) {
         var _this = this;
-        debugger;
         return {
             kind: node.kind,
             flags: node.flags,

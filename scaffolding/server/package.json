@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "ng2plusserver",
+=======
+  "name": "ng2plus",
+>>>>>>> 1e18c016e527c5a2d6325bccd96ce68784f2e763
   "version": "0.1.0",
   "scripts": {},
   "dependencies": {

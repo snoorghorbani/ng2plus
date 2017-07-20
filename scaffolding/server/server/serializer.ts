@@ -63,7 +63,7 @@ export class Serializer {
     extractByNodeKind(node) {
         if (ts.isIdentifier(node))
             return this.extractIdentifier(<ts.Identifier>node)
-            
+
         switch (node.kind) {
             case ts.SyntaxKind.ObjectLiteralExpression:
                 return this.extractObjectLiteralExpression(<ts.ObjectLiteralExpression>node);
@@ -75,6 +75,8 @@ export class Serializer {
                 return this.extractConstructor(<ts.ConstructorDeclaration>node);
             case ts.SyntaxKind.NumericLiteral:
                 return this.extractNumericLiteral(<ts.NumericLiteral>node);
+            case ts.SyntaxKind.MethodDeclaration:
+                return this.extractMethodDeclaration(<ts.MethodDeclaration>node);
             default:
                 debugger
         }
@@ -95,6 +97,9 @@ export class Serializer {
         //     flags: node.flags,
         //     value: this[methodName](node)
         // }
+    }
+    extractMethodDeclaration(arg0: any): any {
+        throw new Error("Method not implemented.");
     }
     extractIdentifier(node: ts.Identifier): I.Identifier {
         return {

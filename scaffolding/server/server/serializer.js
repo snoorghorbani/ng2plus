@@ -69,6 +69,8 @@ var Serializer = (function () {
                 return this.extractConstructor(node);
             case ts.SyntaxKind.NumericLiteral:
                 return this.extractNumericLiteral(node);
+            case ts.SyntaxKind.MethodDeclaration:
+                return this.extractMethodDeclaration(node);
             default:
                 debugger;
         }
@@ -88,6 +90,9 @@ var Serializer = (function () {
         //     flags: node.flags,
         //     value: this[methodName](node)
         // }
+    };
+    Serializer.prototype.extractMethodDeclaration = function (arg0) {
+        throw new Error("Method not implemented.");
     };
     Serializer.prototype.extractIdentifier = function (node) {
         return {

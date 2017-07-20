@@ -34,7 +34,7 @@ export interface Class extends Node {
     members: Node[];
     constructors: DocEntry[];
     documentation: string;
-    decorators: any[]
+    decorators: Decorator[]
 }
 export interface Parameter extends Node {
 
@@ -57,24 +57,23 @@ export type Name = {
 export interface NumericLiteralDecleration extends Node {
     text: string
 }
-export interface Expression extends Node {
-    // kind: ts.SyntaxKind,
-    // flags: ts.NodeFlags,
-    // expression: {
-    //     text: string,
-    //     arguments: any
-    // }
 
-}
-export interface ArrayLiteralExpression extends Expression {
-    kind: ts.SyntaxKind;
-    flags: ts.NodeFlags;
-    // multiLine: boolean;
+export interface ArrayLiteralExpression extends Node {
     elements: Expression[];
 }
 export interface Identifier extends Node {
     text: string
 }
+export interface ObjectLiteralExpression extends Node {
+    properties: PropertyDecleration[]
+}
+export interface DecoratorExpression {
+    expression: {
+        text: string,
+        arguments: Expression[];
+    }
+}
+export type Expression = ObjectLiteralExpression | ArrayLiteralExpression | Identifier | DecoratorExpression;
 export interface Decorator extends Node {
     expression: Expression;
 }
@@ -83,6 +82,6 @@ export interface Modifier {
 }
 export interface MethodDeclaration extends Node {
     name: Name;
-    parameters: Parameter[],
+    parameters: Expression[],
     decorators: Decorator[]
 }

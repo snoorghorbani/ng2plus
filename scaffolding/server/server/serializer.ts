@@ -142,7 +142,7 @@ export class Serializer {
             decorators: node.decorators.map(decoratorNode => this.extractDecorator(decoratorNode))
         };
     }
-    extractDecorator(decoratorNode) {
+    extractDecorator(decoratorNode): I.Decorator {
         return {
             kind: decoratorNode.kind,
             flags: decoratorNode.flags,
@@ -156,7 +156,7 @@ export class Serializer {
             }
         };
     }
-    extractArguments(expressionNode) {
+    extractArguments(expressionNode): I.Expression[] {
         return expressionNode.arguments.map(argumentNode => {
             var methodName: string;
             if (argumentNode.kind === ts.SyntaxKind.ObjectLiteralExpression)
@@ -167,7 +167,7 @@ export class Serializer {
             return this[methodName](argumentNode)
         })
     }
-    extractObjectLiteralExpression(node) {
+    extractObjectLiteralExpression(node): I.ObjectLiteralExpression {
         return {
             flags: node.flags,
             kind: ts.SyntaxKind.ObjectLiteralExpression,

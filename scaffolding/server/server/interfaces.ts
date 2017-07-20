@@ -34,7 +34,7 @@ export interface Class extends Node {
     members: Node[];
     constructors: DocEntry[];
     documentation: string;
-    decorators: any[]
+    decorators: Decorator[]
 }
 export interface Parameter extends Node {
 
@@ -64,7 +64,16 @@ export interface ArrayLiteralExpression extends Node {
 export interface Identifier extends Node {
     text: string
 }
-export type Expression = Node | Identifier;
+export interface ObjectLiteralExpression extends Node {
+    properties: PropertyDecleration[]
+}
+export interface DecoratorExpression {
+    expression: {
+        text: string,
+        arguments: Expression[];
+    }
+}
+export type Expression = ObjectLiteralExpression | ArrayLiteralExpression | Identifier | DecoratorExpression;
 export interface Decorator extends Node {
     expression: Expression;
 }

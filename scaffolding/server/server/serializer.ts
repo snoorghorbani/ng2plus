@@ -18,7 +18,7 @@ export class Serializer {
         this.program = ts.createProgram([filePath], options);
         // Get the checker, we will use it to find more about classes
         this.checker = this.program.getTypeChecker();
-        this.sourceFile = this.program.getSourceFiles().find(i=>i.fileName.includes('test.ts'));
+        this.sourceFile = this.program.getSourceFiles().find(i => i.fileName.includes('test.ts'));
     }
 
     visitAllNode(): I.visitResult {
@@ -63,7 +63,7 @@ export class Serializer {
     extractByNodeKind(node) {
         if (ts.isIdentifier(node))
             return this.extractIdentifier(<ts.Identifier>node)
-
+            
         switch (node.kind) {
             case ts.SyntaxKind.ObjectLiteralExpression:
                 return this.extractObjectLiteralExpression(<ts.ObjectLiteralExpression>node);

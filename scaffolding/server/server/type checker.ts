@@ -9,7 +9,7 @@ var printer = ts.createPrinter({
 });
 
 var serializer = new Serializer(
-    "D:\\Project\\ng2plus\\ng2plus\\scaffolding\\server\\test.ts",
+    ".\\test.ts",
     {
         target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS
     }

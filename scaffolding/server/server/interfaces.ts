@@ -36,12 +36,12 @@ export interface Class extends Node {
     documentation: string;
     decorators: any[]
 }
-export interface parameter extends Node {
+export interface Parameter extends Node {
 
 }
 export interface TextRange { }
 export interface Constructor extends Node {
-    parameters: parameter[];
+    parameters: Parameter[];
 }
 export interface Initializer extends Node {
     // multiLine: boolean;
@@ -58,6 +58,12 @@ export interface NumericLiteralDecleration extends Node {
     text: string
 }
 export interface Expression extends Node {
+    // kind: ts.SyntaxKind,
+    // flags: ts.NodeFlags,
+    // expression: {
+    //     text: string,
+    //     arguments: any
+    // }
 
 }
 export interface ArrayLiteralExpression extends Expression {
@@ -68,4 +74,15 @@ export interface ArrayLiteralExpression extends Expression {
 }
 export interface Identifier extends Node {
     text: string
+}
+export interface Decorator extends Node {
+    expression: Expression;
+}
+export interface Modifier {
+    decorators: ts.Modifier;
+}
+export interface MethodDecleration extends Node {
+    name: Name;
+    parameters: Parameter[],
+    decorators: Decorator[]
 }

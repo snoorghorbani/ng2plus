@@ -7,7 +7,7 @@ var resultFile = ts.createSourceFile("./someFileName.ts", "", ts.ScriptTarget.La
 var printer = ts.createPrinter({
     newLine: ts.NewLineKind.LineFeed
 });
-var serializer = new serializer_1.Serializer("D:\\Project\\ng2plus\\ng2plus\\scaffolding\\server\\test.ts", {
+var serializer = new serializer_1.Serializer(".\\test.ts", {
     target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS
 });
 var data = serializer.visitAllNode();

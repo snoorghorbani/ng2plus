@@ -57,24 +57,14 @@ export type Name = {
 export interface NumericLiteralDecleration extends Node {
     text: string
 }
-export interface Expression extends Node {
-    // kind: ts.SyntaxKind,
-    // flags: ts.NodeFlags,
-    // expression: {
-    //     text: string,
-    //     arguments: any
-    // }
 
-}
-export interface ArrayLiteralExpression extends Expression {
-    kind: ts.SyntaxKind;
-    flags: ts.NodeFlags;
-    // multiLine: boolean;
+export interface ArrayLiteralExpression extends Node {
     elements: Expression[];
 }
 export interface Identifier extends Node {
     text: string
 }
+export type Expression = Node | Identifier;
 export interface Decorator extends Node {
     expression: Expression;
 }
@@ -83,6 +73,6 @@ export interface Modifier {
 }
 export interface MethodDecleration extends Node {
     name: Name;
-    parameters: Parameter[],
+    parameters: Expression[],
     decorators: Decorator[]
 }

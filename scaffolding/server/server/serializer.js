@@ -91,8 +91,14 @@ var Serializer = (function () {
         //     value: this[methodName](node)
         // }
     };
-    Serializer.prototype.extractMethodDeclaration = function (arg0) {
-        throw new Error("Method not implemented.");
+    Serializer.prototype.extractMethodDeclaration = function (node) {
+        return {
+            kind: ts.SyntaxKind.MethodDeclaration,
+            flags: node.flags,
+            name: node.name,
+            decorators: node.decorators,
+            parameters: node.parameters
+        };
     };
     Serializer.prototype.extractIdentifier = function (node) {
         return {

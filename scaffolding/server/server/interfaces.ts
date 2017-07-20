@@ -81,7 +81,7 @@ export interface Decorator extends Node {
 export interface Modifier {
     decorators: ts.Modifier;
 }
-export interface MethodDecleration extends Node {
+export interface MethodDeclaration extends Node {
     name: Name;
     parameters: Parameter[],
     decorators: Decorator[]

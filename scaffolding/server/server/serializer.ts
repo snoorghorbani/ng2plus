@@ -98,8 +98,14 @@ export class Serializer {
         //     value: this[methodName](node)
         // }
     }
-    extractMethodDeclaration(arg0: any): any {
-        throw new Error("Method not implemented.");
+    extractMethodDeclaration(node :ts.MethodDeclaration): I.MethodDeclaration {
+        return{
+           kind:ts.SyntaxKind.MethodDeclaration,
+           flags:node.flags,
+           name:node.name,
+           decorators:node.decorators,
+           parameters:node.parameters
+    }
     }
     extractIdentifier(node: ts.Identifier): I.Identifier {
         return {

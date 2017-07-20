@@ -18,8 +18,7 @@ export class Serializer {
         this.program = ts.createProgram([filePath], options);
         // Get the checker, we will use it to find more about classes
         this.checker = this.program.getTypeChecker();
-        this.sourceFile = this.program.getSourceFiles().pop();
-
+        this.sourceFile = this.program.getSourceFiles().find(i=>i.fileName.includes('test.ts'));
     }
 
     visitAllNode(): I.visitResult {
@@ -124,7 +123,6 @@ export class Serializer {
     extractClassDecleration(node: ts.ClassDeclaration): I.Class {
         var symbol = this.checker.getSymbolAtLocation(node.name);
         var serializedClass = this.serializeClass(symbol);
-        debugger
 
         return {
             name: symbol.name,
@@ -172,8 +170,6 @@ export class Serializer {
         }
     }
     extractPropertyDeclaration(propertyNodeItem: ts.PropertyDeclaration): I.PropertyDecleration {
-        if (!propertyNodeItem.initializer) debugger
-        debugger
         return {
             kind: propertyNodeItem.kind,
             flags: propertyNodeItem.flags,
@@ -203,7 +199,6 @@ export class Serializer {
         }
     }
     extractArrayLiteralExpression(node: ts.ArrayLiteralExpression): I.ArrayLiteralExpression {
-        debugger
         return {
             kind: node.kind,
             flags: node.flags,

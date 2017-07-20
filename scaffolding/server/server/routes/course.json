@@ -1,0 +1,164 @@
+{
+    "courses": {
+        "101": {
+            "es": {
+                "grammer": {
+                    // Names
+                    // Numbers
+                    // Strings
+                    // Statements 
+                    // Expressions5
+                    // Literals 
+                    // Functions
+                },
+                "arrays": {
+                    // Array Literals
+                },
+                "objects": {
+                    // Object Literals
+                    // Retrieval
+                    // Update
+                    // Reference
+                    // Prototype
+                    // Reflection
+                    // Enumeration
+                    // Delete
+                    // this
+                    // Global Abatement
+                },
+                "functions": {
+                    // Function Objects
+                    // Function Literal
+                    // Invocation
+                    // Arguments
+                    // Return
+                    // Exceptions
+                    // Augmenting Types
+                    // Recursion
+                    // Scope
+                    // prototype
+                    // Closure
+                    // Callbacks
+                },
+                "regular experssion": {}
+            }
+        },
+        "303": {
+            "es": {
+                "inheritance": {
+                    // Pseudoclassical
+                    // Object Specifiers
+                    // Prototypal
+                    // Functional
+                },
+                "async": {},
+                "performance": {
+                    // garbage collector
+                    // event loop and callback handeling
+                }
+            },
+            "es6": {
+                "class": {},
+                "promise": {},
+                "async-await": {},
+                "arrow functions": {}
+            },
+            "test": {
+                "methodolgies": {
+                    // TDD
+                    // BDD
+                    // ATDD
+                },
+                "platforms": {
+                    // jasmine
+                },
+                "frameworks": {
+                    //mocha
+                },
+                "assertion libraries": {
+                    //chai
+                }
+            },
+            "oop & fp": {
+                // Object-orientation with prototypes
+                // functional programing concepts
+                // functional programing in javascript
+            }
+        },
+        "reactive programming": {
+        },
+        "angular2": {
+            // typescript
+            // setup & angular-cli
+            // architecture
+            // concepts
+            // module
+            // components
+            // directives
+            // pipes
+            // routing
+            // lazy loading
+            // environments
+            // http
+            // testing
+            // dependency injection
+            // code style
+        },
+        "fullstack": {
+            // Mongodb
+            // Express
+            // Angular
+            // Node
+        },
+        "design pattern": {
+            // singleton
+            // module
+            // facade
+            // factory
+            // bridge
+            // mediator
+            // strategy
+            // command
+            // composite
+            // proxy
+            // chain of responsibility
+            // adaptor
+            // flyweight
+            // inheritance
+        }
+    }
+}
+// "javascript charts": {
+//     // D3
+// }
+//     "oop & fp": {
+//     // Object-orientation with prototypes
+//     // functional programing concepts
+//     // functional programing in javascript
+// },
+// "modern javascipt application": {
+//     // multi treading
+//     // service worker
+//     // web component
+//     // web dll
+//     // progressive app
+//     // web worker
+// }
+// "tools": {
+//     "lint": {},
+//     "documentation": {},
+//     "task runner": {
+//         // grunt
+//         // gulp
+//         // broccoli
+//     },
+//     "module loader": {
+//         // requirejs
+//         // webpack
+//         // systemjs
+//         // Browserify
+//     },
+//     "scaffolder": {
+//         // yeoman
+//     }
+// }

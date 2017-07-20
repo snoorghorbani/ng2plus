@@ -1,0 +1,9 @@
+﻿/*.my-header { transition: background-color 2s ease-out; }
+.header-container { background-color: #005392; }*/
+
+.page-scroll-header { 
+    /*background-color: #ccc !important;*/
+     /*opacity: 0.9;*/
+    position: fixed;
+    top: 120px !important;
+}

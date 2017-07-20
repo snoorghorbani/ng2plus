@@ -1,0 +1,7 @@
+export * from './<%= name %>.global';
+
+
+
+import './<%= name %>.route-outlets';
+
+export * from './<%= name %>.module';

@@ -1,0 +1,11 @@
+import { LargelayoutModule } from '<% for(var i=0;i<pathDetail.depth;i++){ %>../<% } %>large-layout';
+<%= pathDetail.depth %>
+//import {
+//    IndexComponent
+//} from '.';
+
+LargelayoutModule.routeOutlets
+//    .add_child({
+//        path: '',
+//        component: IndexComponent
+//    });

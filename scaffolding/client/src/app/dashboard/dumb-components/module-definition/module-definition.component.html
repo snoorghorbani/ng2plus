@@ -1,0 +1,34 @@
+<md-card>
+  <md-card-title>
+   <h4> {{moduleDef.name}}</h4>
+  </md-card-title>
+  <md-card-subtitle>
+    {{moduleDef.path}}
+  </md-card-subtitle>
+  <md-card-content>
+
+    <md-input-container>
+      <input mdInput [(ngModel)]="name">
+    </md-input-container>
+
+    <h4>Components</h4>
+    <md-chip-list>
+      <md-chip color="primary" selected="true" *ngFor="let component of moduleDef.components">{{component.name}}</md-chip>
+    </md-chip-list>
+
+    <h4>Imports</h4>
+    <md-chip-list>
+      <md-chip color="primary" selected="true" *ngFor="let module of moduleDef.imports">{{module.name}}</md-chip>
+    </md-chip-list>
+
+    <h4>Exports</h4>
+    <md-chip-list>
+      <md-chip color="primary" selected="true" *ngFor="let module of moduleDef.exports">{{module.name}}</md-chip>
+    </md-chip-list>
+
+  </md-card-content>
+  <md-card-actions>
+    <button md-raised-button color="primary" (click)="generate_module()">Add Module</button>
+    <button md-raised-button color="primary" (click)="generate_component()">Add Component</button>
+  </md-card-actions>
+</md-card>

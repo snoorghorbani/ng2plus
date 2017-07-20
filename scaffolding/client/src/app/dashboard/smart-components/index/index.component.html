@@ -1,0 +1,22 @@
+<div fxLayout fxLayoutAlign="center">
+  <div id='chart'>
+    <app-structure-diagram [modules]="modules" (entitySelect)="showDefinition($event)"></app-structure-diagram>
+  </div>
+
+  <div id='detail'>
+
+    <app-module-definition 
+        *ngIf="showModuleDefinition()" 
+        [moduleDef]="moduleDefinition" 
+        [moduleDependencies]="activeModuleDependencies">
+    </app-module-definition>
+
+    <app-component-definition 
+      *ngIf="showComponentDefinition()" 
+      [componentDef]="componentDefinition"
+      [componenDependencies]="activeModuleDependencies">
+    </app-component-definition>
+
+  </div>
+  
+</div>

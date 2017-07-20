@@ -1,0 +1,24 @@
+<div id="search-navbar">
+  <router-outlet name="search@navbar"></router-outlet>
+</div>
+<div id="toolbar">
+  <button md-icon-button  (click)="sidenav.toggle()">
+     <md-icon>menu</md-icon>
+  </button>
+  <router-outlet name="toolbar"></router-outlet>
+</div>
+
+<md-sidenav-container>
+  <md-sidenav mode="side" #sidenav>
+    <md-nav-list>
+      <div id="logo-outlet">
+        <router-outlet name="logo@navbar"></router-outlet>
+      </div>
+      <div id="menu-navbar" [@menuAnimation]="toolbarAnimationState | async">
+        <router-outlet name="menu@navbar"></router-outlet>
+      </div>
+      <!--<a *ngFor="let item of routes" md-list-item (click)="layout.close()" [routerLink]="[item.route]"><md-icon>{{item.icon}}</md-icon>{{item.title}}</a>-->
+    </md-nav-list>
+  </md-sidenav>
+  <router-outlet></router-outlet>
+</md-sidenav-container>

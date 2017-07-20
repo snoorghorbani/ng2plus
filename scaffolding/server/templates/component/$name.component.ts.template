@@ -1,0 +1,19 @@
+import { Component, OnInit } from '@angular/core';
+
+import { <%= pathDetail.folderName %>Definition } from '../';
+
+@Component({
+  selector: 'app-<%= name.toLowerCase() %>',
+  templateUrl: './<%= name.toLowerCase() %>.component.html',
+  styleUrls: ['./<%= name.toLowerCase() %>.component.css']
+})
+export class <%= name %>Component implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+
+  }
+}
+
+<%= pathDetail.folderName %>Definition.declarations.push(<%= name %>Component);

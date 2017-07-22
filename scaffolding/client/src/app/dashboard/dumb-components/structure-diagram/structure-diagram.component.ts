@@ -13,7 +13,7 @@ import { AppService } from '../../app.service';
 export class StructureDiagramComponent implements OnInit {
   @Output() entitySelect = new EventEmitter();
   dim: number = 500;
-  root = 'A:\\git\\@ng2plus\\scaffolding\\client\\src\\';
+  root = 'A:\\git\\ng2plus\\scaffolding\\client\\src\\';
   _modules: any[] = [];
 
   @Input()

@@ -13,7 +13,7 @@ export class ComponentDefinitionComponent implements OnInit {
   @Input()
   componenDependencies;
 
-  root = 'A:\\git\\@ng2plus\\scaffolding\\client\\src\\';
+  root = 'A:\\git\\ng2plus\\scaffolding\\client\\src\\';
   name: string = 'test';
 
   constructor() { }

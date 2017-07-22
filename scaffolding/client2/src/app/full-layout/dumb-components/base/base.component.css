@@ -1,0 +1,47 @@
+/*.mat-sidenav-content{
+    margin-right: 320px !important; 
+    margin-left: 0px !important;
+}*/
+
+
+/*#logo-outlet {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+#menu-navbar {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#search-navbar {
+    position: absolute;
+    left: 121px;
+    top: 0px;
+}
+
+#toolbar {
+    top: 7px;
+    position: absolute;
+    left: 30px;
+}
+
+footer {
+    background: rgba(33, 33, 33, 1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 170px;
+    transform: translateY(0);
+}*/
+
+#toolbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+}

@@ -1,0 +1,23 @@
+img {
+    height: 100%;
+}
+
+.shatelLogoAnimation {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    height: 69px;
+    
+    /*transform: translateY(0px);
+    transition: 400ms;*/
+}
+
+.logoTypeAnimation {
+    position: absolute;
+    height: 12px;
+    right: 0;
+
+    /*transition: 400ms;
+    transform: translateY(0px);
+    opacity: 1;*/
+}

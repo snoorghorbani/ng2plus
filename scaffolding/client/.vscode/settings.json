@@ -1,0 +1,20 @@
+{
+    "cucumberautocomplete.steps": [
+        "e2e/steps/*.js",
+        "node_modules/qa-lib/src/step_definitions/*.js"
+    ],
+    "cucumberautocomplete.pages": {
+        
+    },
+    "editor.quickSuggestions": {
+        "comments": true,
+        "strings":  true,
+        "other":    true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true
+    },
+    "typescript.check.tscVersion": true,
+    "editor.minimap.enabled": false
+}

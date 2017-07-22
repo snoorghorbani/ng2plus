@@ -1,0 +1,147 @@
+﻿/*@font-face {
+    font-family: "iran-sans";
+    src: url("fonts/IRANSansWeb_UltraLight.eot") format("eot"), url("fonts/IRANSansWeb_UltraLight.woff") format("woff"), url("fonts/IRANSansWeb_UltraLight.woff2") format("woff2"), url("fonts/IRANSansWeb_UltraLight.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "iran-sans-light";
+    src: url("fonts/IRANSansWeb_Light.eot") format("eot"), url("fonts/IRANSansWeb_Light.woff") format("woff"), url("fonts/IRANSansWeb_Light.woff2") format("woff2"), url("fonts/IRANSansWeb_Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "iran-sans-bold";
+    src: url("fonts/IRANSansWeb_Bold.eot") format("eot"), url("fonts/IRANSansWeb_Bold.woff") format("woff"), url("fonts/IRANSansWeb_Bold.woff2") format("woff2"), url("fonts/IRANSansWeb_Bold.ttf") format("truetype");
+}*/
+
+html,
+body,
+.mat-sidenav-container {
+    background-color: rgb(244, 244, 244) !important;
+    /*filter: grayscale();*/
+}
+
+
+/*body {
+    font-family: 'iran-sans', sans-serif;
+    font-size: 0.8125em;
+    line-height: 2em;
+}
+
+body .mat-card md-card-subtitle {
+    font-size: 19px;
+}
+
+.mat-button {
+    font-family: 'iran-sans-light' !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'iran-sans-bold' !important;
+}
+
+body,
+body .mat-card md-card-title,
+body .mat-card md-card-subtitle,
+.mat-button-focus-overlay,
+.mat-icon-button,
+.mat-fab,
+.mat-icon-button,
+.mat-mini-fab,
+.mat-raised-button,
+.mat-input-container,
+.mat-menu-item,
+.mat-checkbox-label,
+.mat-toolbar,
+.mat-tab-label,
+.mat-card-title {
+    font-family: 'iran-sans', sans-serif !important;
+    font-weight: normal;
+}*/
+
+
+/*.mat-sidenav-content{
+    margin-right: 320px !important; 
+    margin-left: 0px !important;
+}*/
+
+
+/*#page-container { background: #fcfcfc; }
+.logo-container { text-align: center; position: relative; top: 10px; }
+.logo-nav { border-bottom: 2px solid #ececec; background-color: #f5f5f5; }
+.toolbar-nav { border-bottom: 2px solid #ececec; }
+.mat-tab-header { top: -49px; right: 45px; }
+.mat-tab-label { opacity: 1 !important; }
+.main-menu { width: 100%; }
+.search-box .mat-icon { color: #e67e22 !important; }
+app-search-box { width: 50%; position: relative; top: 1px; }
+app-main-menu { width: 50%; border-bottom: 2px solid #3f51b5; position: relative; top: 5px; z-index: 2; }
+
+.banner-container { height: 40vh; overflow: hidden; position: relative; z-index: 1; }
+.banner-container img { width: 100%; }
+.slider-card-container { z-index: 2; position: relative; top: -80px; }
+.slider-card { font-family: 'iran-sans', sans-serif !important; padding-top: 25px !important; padding-bottom: 25px !important; }
+.slider-card md-icon { position: absolute; color: #fff; font-size: 115px; left: 20px; top: 0; opacity: 0.7; }
+.slider-card h2 { text-align: center; position: relative; }
+.slider-card p { font-size: 14px; text-align: justify; line-height: 30px; position: relative; }
+.dotted { position: absolute; z-index: 1000; height: 100%; top: 0; background-repeat: repeat; }
+
+.guide-card-container { height: 440px; margin-top: 70px; z-index: 2; position: relative; top: -80px; }
+.guide-card { font-family: 'iran-sans', sans-serif !important; padding-top: 25px !important; padding-bottom: 25px !important; box-shadow: none !important; background-color: rgba(255,255,255,0.7); }
+.guide-card md-icon { color: #ccc; font-size: 85px; display: block; margin: 0 auto; }
+.guide-card h2 { text-align: center; position: relative; font-size: 18px; color: #555; margin-top: 30px; }*/
+
+.mat-sidenav-content,
+md-sidenav-container,
+body {
+    height: 100vh !important;
+    overflow: hidden !important;
+    /*background: rgb(163, 245, 207);*/
+    background: #f5f5f5;
+}
+
+#chart {
+    position: fixed;
+    left: 0;
+    right: calc(100vw - 100vh);
+}
+
+#detail {
+    position: fixed;
+    left: calc(100vw - 100vh);
+    right: 0;
+}
+
+.node {
+    cursor: pointer;
+}
+
+.node:hover {
+    stroke: #000;
+    stroke-width: 1.5px;
+}
+
+.node--leaf {
+    fill: white;
+}
+
+.label {
+    font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-anchor: middle;
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+}
+
+.label,
+.node--root,
+.node--leaf {
+    /*pointer-events: none;*/
+}
+
+.node.component {
+    stroke-dasharray: 10px;
+    stroke: black;
+}

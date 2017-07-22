@@ -15,7 +15,7 @@ export class ModuleDefinitionComponent implements OnInit {
   @Input()
   moduleDependencies;
 
-  root = 'A:\\git\\@ng2plus\\scaffolding\\client\\src\\';
+  root = 'A:\\git\\ng2plus\\scaffolding\\client\\src\\';
   name: string = 'test';
   constructor(private appService: AppService) { }
 

@@ -19,7 +19,7 @@ export enum entities {
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-  root = 'A:\\git\\@ng2plus\\scaffolding\\client\\src\\';
+  root = 'A:\\git\\ng2plus\\scaffolding\\client\\src\\';
   modules: string[] = [];
   activeEntity: entities;
   moduleDefinition: ModuleDefinition = new ModuleDefinition({});

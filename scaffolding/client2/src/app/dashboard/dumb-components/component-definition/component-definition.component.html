@@ -1,0 +1,34 @@
+<md-card>
+  <md-card-title>
+    <h4> {{componentDef.name}}</h4>
+  </md-card-title>
+  <md-card-content>
+    <div>
+      <b>Path:</b> {{componentDef.path.path}} bytes
+    </div>
+    <div>
+      <b>Size:</b> {{componentDef.path.size}} bytes
+    </div>
+    <div>
+      <b>Dir:</b> {{componentDef.path.dir}}
+    </div>
+  </md-card-content>
+</md-card>
+
+<md-card>
+  <md-card-content>
+    <div>
+      <md-radio-group [(ngModel)]="componentDef.type">
+        <md-radio-button value="smart">smart</md-radio-button>
+        <md-radio-button value="dumb">dumb</md-radio-button>
+      </md-radio-group>
+    </div>
+
+    <md-input-container>
+      <input mdInput [(ngModel)]="name">
+    </md-input-container>
+  </md-card-content>
+  <md-card-actions>
+    <button md-raised-button color="primary" (click)="save_component()">Save Component</button>
+  </md-card-actions>
+</md-card>

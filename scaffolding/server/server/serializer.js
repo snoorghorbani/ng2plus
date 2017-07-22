@@ -25,7 +25,10 @@ var Serializer = (function () {
                 members: [],
                 constructors: [],
                 documentation: undefined,
-                decorators: []
+                decorators: [],
+                typeParameters: undefined,
+                modifiers: undefined,
+                heritageClauses: undefined
             },
             importDeclerations: []
         };
@@ -114,7 +117,14 @@ var Serializer = (function () {
                 text: node.name.getText()
             },
             parameters: node.parameters.map(function (parameterNode) { return _this.extractByNodeKind(parameterNode); }),
-            decorators: (!node.decorators) ? [] : node.decorators.map(function (decoratorNode) { return _this.extractByNodeKind(decoratorNode); })
+            decorators: (!node.decorators) ? [] : node.decorators.map(function (decoratorNode) { return _this.extractByNodeKind(decoratorNode); }),
+            modifiers: undefined,
+            asteriskToken: undefined,
+            body: undefined,
+            Parameters: undefined,
+            questionToken: undefined,
+            type: undefined,
+            typeParameters: undefined
         };
     };
     Serializer.prototype.extractParameterDeclaration = function (node) {
@@ -124,7 +134,12 @@ var Serializer = (function () {
             name: {
                 text: node.name.getText()
             },
-            type: this.extractByNodeKind(node.type)
+            type: this.extractByNodeKind(node.type),
+            decorators: [],
+            dotDotDotToken: undefined,
+            initializer: undefined,
+            modifiers: undefined,
+            questionToken: undefined
         };
     };
     Serializer.prototype.extractIdentifier = function (node) {
@@ -164,7 +179,10 @@ var Serializer = (function () {
             type: serializedClass.type,
             constructors: serializedClass.constructors,
             documentation: serializedClass.documentation,
-            decorators: node.decorators.map(function (decoratorNode) { return _this.extractDecorator(decoratorNode); })
+            decorators: (!node.decorators) ? [] : node.decorators.map(function (decoratorNode) { return _this.extractDecorator(decoratorNode); }),
+            heritageClauses: undefined,
+            modifiers: undefined,
+            typeParameters: undefined
         };
     };
     Serializer.prototype.extractDecorator = function (decoratorNode) {
@@ -207,7 +225,11 @@ var Serializer = (function () {
             name: {
                 text: propertyNodeItem.name.getText()
             },
-            initializer: this.extractByNodeKind(propertyNodeItem.initializer)
+            initializer: this.extractByNodeKind(propertyNodeItem.initializer),
+            questionToken: (propertyNodeItem.questionToken) ? propertyNodeItem.questionToken.kind : undefined,
+            modifiers: undefined,
+            decorators: [],
+            type: undefined
         };
     };
     Serializer.prototype.extractNumericLiteral = function (node) {

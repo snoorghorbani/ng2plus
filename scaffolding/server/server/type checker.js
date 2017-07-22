@@ -21,13 +21,14 @@ data.importDeclerations.forEach(function (importItemNode) {
 });
 // data.member.map(i => createClassElem(i))
 debugger;
-var classDeclaration = create.createClass({
-    name: create.createIdentifier(data.classDecleration.name),
-    decorators: create.createDecorators(data.classDecleration),
-    modifiers: [ts.createToken(ts.SyntaxKind.ExportKeyword)],
-    typeParameters: undefined,
-    heritageClauses: undefined,
-    members: create.createClassElements(data.classDecleration.members)
-});
+// var classDeclaration = create.createClass({
+//     name: create.createIdentifier(data.classDecleration.name),
+//     decorators: create.createDecorators(data.classDecleration),
+//     modifiers: [ts.createToken(ts.SyntaxKind.ExportKeyword)], //todo
+//     typeParameters: undefined,
+//     heritageClauses: undefined,
+//     members: create.createClassElements(data.classDecleration.members)
+// })
+var classDeclaration = create.createClass(data.classDecleration);
 var result = printer.printNode(ts.EmitHint.Unspecified, classDeclaration, resultFile);
 console.log(result);

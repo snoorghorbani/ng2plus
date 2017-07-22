@@ -32,17 +32,33 @@ export interface Import extends Node {
 export interface Class extends Node {
     name: string;
     type: string;
-    members: Node[];
+    members: ClassElement[];
     constructors: DocEntry[];
     documentation: string;
-    decorators: Decorator[]
+    decorators: Decorator[];
+    typeParameters: any;
+    modifiers: any;
+    heritageClauses: any;
 }
 export interface ParameterDecleration extends Node {
     name: Name;
     type: Token;
+    decorators: Decorator[];
+    modifiers: any;
+    dotDotDotToken: any;
+    questionToken: any;
+    initializer: any;
 }
 export interface TextRange { }
-export type Expression = ObjectLiteralExpression | ArrayLiteralExpression | Identifier | DecoratorExpression | ParameterDecleration;
+export type Expression =
+    ObjectLiteralExpression
+    | ArrayLiteralExpression
+    | Identifier
+    | DecoratorExpression
+    | ParameterDecleration
+    | NumericLiteralDecleration
+    | MethodDeclaration;
+
 export interface Constructor extends Node {
     parameters: ParameterDecleration[];
 }
@@ -51,8 +67,13 @@ export interface Initializer extends Node {
     elements: any[];
 }
 export interface PropertyDecleration extends Node {
-    name: Name,
-    initializer: Expression
+    name: Name;
+    initializer: Expression;
+    questionToken: ts.SyntaxKind.QuestionToken;
+    modifiers: any;
+    type: any;
+    decorators: Decorator[];
+
 };
 export type Name = {
     text: string
@@ -70,7 +91,7 @@ export interface Identifier extends Node {
 export interface ObjectLiteralExpression extends Node {
     properties: PropertyDecleration[]
 }
-export interface DecoratorExpression {
+export interface DecoratorExpression extends Node {
     expression: {
         text: string,
         arguments: Expression[];
@@ -85,7 +106,14 @@ export interface Modifier {
 export interface MethodDeclaration extends Node {
     name: Name;
     parameters: Expression[],
-    decorators: Decorator[]
+    decorators: Decorator[],
+    modifiers: any,
+    asteriskToken: any,
+    questionToken: any,
+    typeParameters: any,
+    Parameters: any,
+    type: any,
+    body: any
 }
 export interface KeywordTypeNode extends Node {
 

@@ -70,6 +70,6 @@ import { CovalentDynamicFormsModule } from '@covalent/dynamic-forms';
 })
 export class SharedModule {
         constructor(test: string = "ali") { }
-        test: number = 2;
+        test?: number = 2;
         zz(param1: string, param2: number) { }
 }

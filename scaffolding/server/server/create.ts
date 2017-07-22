@@ -1,7 +1,7 @@
 import * as ts from "typescript";
 import * as fs from "fs";
 import * as I from "./interfaces";
-
+import * as IC from "./Create.Interface";
 export var createImport = function ({ importClauses, moduleSpecifier }) {
     // var decorator = ts.createDecorator(ts.createLiteral("decorator"));
     // var importSpecifier = ts.createImportSpecifier(ts.createIdentifier("test1"), ts.createIdentifier("test2"));
@@ -52,7 +52,7 @@ export var createCall = function ({ expression, typeArguments, argumentsArray })
     )
 
 }
-export var createDecorators = function ({ decorators }) {
+export var createDecorators: IC.CreateDecorators = function ({ decorators }) {
     return decorators.map(decorator => createDecorator({ decorator }))
 }
 export var createDecorator = function ({ decorator }) {
@@ -64,51 +64,40 @@ export var createDecorator = function ({ decorator }) {
         })
     )
 }
-export var createParameter = function (
-    { decorators = undefined, modifiers = undefined, dotDotDotToken = undefined, name = undefined, questionToken = undefined, type = undefined, initializer = undefined }
-        : { decorators: any, modifiers: any, dotDotDotToken: any, name: any, questionToken?: any, type?: any, initializer?: any }
-) {
-    return ts.createParameter(decorators, modifiers, dotDotDotToken, name, questionToken, type, initializer);
-}
-export var createClassElements = function (members: I.ClassElement[]) {
-    return members.map(member => {
+export var createParameter: IC.CreateParameter = params => ts.createParameter(
+    createDecorators(params),
+    params.modifiers,
+    params.dotDotDotToken,
+    params.name.text,
+    params.questionToken,
+    ts.createKeywordTypeNode((params.type as ts.KeywordTypeNode).kind),
+    params.initializer
+);
+
+export var createClassElements = function (params: { members: I.ClassElement[] }) {
+    return params.members.map(member => {
         switch (member.kind) {
             case ts.SyntaxKind.Constructor:
                 debugger
                 return createConstructor({
                     decorators: undefined,
                     modifiers: undefined,
-                    parameters: (<I.Constructor>member).parameters.map(param => createParameter({
-                        decorators: undefined,
-                        modifiers: undefined,
-                        dotDotDotToken: undefined,
-                        name: param.name.text,
-                        type: ts.createKeywordTypeNode((param.type as ts.KeywordTypeNode).kind)
-
-                    })),
+                    parameters: (<I.Constructor>member).parameters.map(param => createParameter(<I.ParameterDecleration>param)),
                     body: undefined,
                 });
             case ts.SyntaxKind.PropertyDeclaration:
                 return createProperty({
-                    decorators: undefined,
-                    modifiers: undefined,
-                    name: undefined,
+                    kind: member.kind,
+                    flags: member.flags,
+                    decorators: [],
+                    modifiers: [],
+                    name: { text: (<I.PropertyDecleration>member).name.text },
                     questionToken: undefined,
                     type: undefined,
-                    initializer: undefined,
+                    initializer: (<I.PropertyDecleration>member).initializer
                 })
             case ts.SyntaxKind.MethodDeclaration:
-                return createMethod({
-                    decorators: undefined,
-                    modifiers: undefined,
-                    asteriskToken: undefined,
-                    name: undefined,
-                    questionToken: undefined,
-                    typeParameters: undefined,
-                    Parameters: undefined,
-                    type: undefined,
-                    body: undefined
-                })
+                return createMethod(<I.MethodDeclaration>member)
         }
     })
 }
@@ -118,23 +107,43 @@ export var createConstructor = function ({
 ) {
     return ts.createConstructor(decorators, modifiers, parameters, body);
 }
-export var createProperty = function ({ decorators = undefined, modifiers = undefined, name = undefined, questionToken = undefined, type = undefined, initializer = undefined }) {
-    return ts.createProperty(decorators, modifiers, name, questionToken, type, initializer);
+export var createProperty: IC.CreateProperty = params => ts.createProperty(
+    createDecorators(params),
+    params.modifiers,
+    params.name.text,
+    (params.questionToken) ? ts.createToken(params.questionToken) : undefined,
+    params.type,
+    createExpression(params.initializer)
+);
+export var createExpression: IC.createExpression = node => {
+    switch (node.kind) {
+        case ts.SyntaxKind.NumberKeyword:
+            return ts.createNumericLiteral((<I.NumericLiteralDecleration>node).text)
+
+        default:
+            debugger;
+    }
 }
-export var createMethod = function ({ decorators = undefined, modifiers = undefined, asteriskToken = undefined, name = undefined, questionToken = undefined, typeParameters = undefined, Parameters = undefined, type = undefined, body = undefined }) {
-    return ts.createMethod(decorators, modifiers, asteriskToken, name, questionToken, typeParameters, Parameters, type, body);
-}
+export var createMethod: IC.CreateMethod = params => ts.createMethod(
+    createDecorators(params),
+    params.modifiers,
+    params.asteriskToken,
+    params.name.text,
+    params.questionToken,
+    params.typeParameters,
+    params.parameters.map(param => createParameter(<I.ParameterDecleration>param)),
+    params.type,
+    params.body
+);
 export var createClassElement = function ({ }) {
     debugger
 }
-export var createClass = function ({ decorators, name, modifiers, typeParameters = undefined, heritageClauses = undefined, members = undefined }) {
-    debugger
-    return ts.createClassDeclaration(
-        decorators,
-        modifiers,
-        name,
-        typeParameters /*[ts.createTypeParameterDeclaration("testParameter", )]*/,
-        heritageClauses,
-        members
-    );
-}
+
+export var createClass: IC.CreateClass = params => ts.createClassDeclaration(
+    createDecorators(params),
+    params.modifiers,
+    params.name,
+    params.typeParameters /*[ts.createTypeParameterDeclaration("testParameter", )]*/,
+    params.heritageClauses,
+    createClassElements(params)
+);

@@ -17,7 +17,12 @@
                         "type": {
                             "flags": 0,
                             "kind": 136
+<<<<<<< HEAD
                         }
+=======
+                        },
+                        "decorators": []
+>>>>>>> 18bc6219f6b73a861324411da2520400f1953d4c
                     }
                 ]
             },
@@ -31,7 +36,9 @@
                     "kind": 8,
                     "flags": 0,
                     "text": "2"
-                }
+                },
+                "questionToken": 55,
+                "decorators": []
             },
             {
                 "kind": 151,
@@ -49,7 +56,8 @@
                         "type": {
                             "flags": 0,
                             "kind": 136
-                        }
+                        },
+                        "decorators": []
                     },
                     {
                         "kind": 146,
@@ -60,7 +68,8 @@
                         "type": {
                             "flags": 0,
                             "kind": 133
-                        }
+                        },
+                        "decorators": []
                     }
                 ],
                 "decorators": []
@@ -178,7 +187,8 @@
                                                     "text": "CovalentExpansionPanelModule"
                                                 }
                                             ]
-                                        }
+                                        },
+                                        "decorators": []
                                     },
                                     {
                                         "kind": 261,
@@ -190,7 +200,8 @@
                                             "kind": 177,
                                             "flags": 0,
                                             "elements": []
-                                        }
+                                        },
+                                        "decorators": []
                                     },
                                     {
                                         "kind": 261,
@@ -279,7 +290,8 @@
                                                     "text": "CovalentExpansionPanelModule"
                                                 }
                                             ]
-                                        }
+                                        },
+                                        "decorators": []
                                     }
                                 ]
                             }

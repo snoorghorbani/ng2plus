@@ -81,6 +81,9 @@ export type Name = {
 export interface NumericLiteralDecleration extends Node {
     text: string
 }
+export interface StringLiteralDecleration extends Node {
+    text: string
+}
 
 export interface ArrayLiteralExpression extends Node {
     elements: Expression[];

@@ -79,6 +79,9 @@ export class Serializer {
                 return this.extractConstructor(<ts.ConstructorDeclaration>node);
             case ts.SyntaxKind.NumericLiteral:
                 return this.extractNumericLiteral(<ts.NumericLiteral>node);
+            case ts.SyntaxKind.StringLiteral:
+            debugger;
+                return this.extractStringLiteral(<ts.StringLiteral>node);
             case ts.SyntaxKind.MethodDeclaration:
                 return this.extractMethodDeclaration(<ts.MethodDeclaration>node);
             case ts.SyntaxKind.Parameter:
@@ -89,7 +92,6 @@ export class Serializer {
                 return this.extractKeywordTypeNode(<ts.KeywordTypeNode>node);
             case ts.SyntaxKind.NumberKeyword:
                 return this.extractKeywordTypeNode(<ts.KeywordTypeNode>node);
-
             default:
                 debugger
         }
@@ -240,6 +242,7 @@ export class Serializer {
             type: undefined
         }
     }
+    extractStringLiteral(node:ts.StringLiteral):I.StringLiteralDecleration
     extractNumericLiteral(node: ts.NumericLiteral): I.NumericLiteralDecleration {
         return {
             kind: node.kind,
@@ -248,6 +251,7 @@ export class Serializer {
         }
     }
     extractConstructor(node: ts.ConstructorDeclaration): I.Constructor {
+        debugger;
         return {
             kind: node.kind,
             flags: node.flags,

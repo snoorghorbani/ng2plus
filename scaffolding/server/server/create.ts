@@ -86,16 +86,7 @@ export var createClassElements = function (params: { members: I.ClassElement[] }
                     body: undefined,
                 });
             case ts.SyntaxKind.PropertyDeclaration:
-                return createProperty({
-                    kind: member.kind,
-                    flags: member.flags,
-                    decorators: [],
-                    modifiers: [],
-                    name: { text: (<I.PropertyDecleration>member).name.text },
-                    questionToken: undefined,
-                    type: undefined,
-                    initializer: (<I.PropertyDecleration>member).initializer
-                })
+                return createProperty(<I.PropertyDecleration>member)
             case ts.SyntaxKind.MethodDeclaration:
                 return createMethod(<I.MethodDeclaration>member)
         }
@@ -107,17 +98,18 @@ export var createConstructor = function ({
 ) {
     return ts.createConstructor(decorators, modifiers, parameters, body);
 }
-export var createProperty: IC.CreateProperty = params => ts.createProperty(
+export var createProperty: IC.CreateProperty = params => {
+    return ts.createProperty(
     createDecorators(params),
     params.modifiers,
     params.name.text,
-    (params.questionToken) ? ts.createToken(params.questionToken) : undefined,
+    (params.questionToken) ?  ts.createToken(params.questionToken) : undefined,
     params.type,
     createExpression(params.initializer)
-);
+)};
 export var createExpression: IC.createExpression = node => {
     switch (node.kind) {
-        case ts.SyntaxKind.NumberKeyword:
+        case ts.SyntaxKind.NumericLiteral:
             return ts.createNumericLiteral((<I.NumericLiteralDecleration>node).text)
 
         default:

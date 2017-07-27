@@ -66,16 +66,7 @@ exports.createClassElements = function (params) {
                     body: undefined
                 });
             case ts.SyntaxKind.PropertyDeclaration:
-                return exports.createProperty({
-                    kind: member.kind,
-                    flags: member.flags,
-                    decorators: [],
-                    modifiers: [],
-                    name: { text: member.name.text },
-                    questionToken: undefined,
-                    type: undefined,
-                    initializer: member.initializer
-                });
+                return exports.createProperty(member);
             case ts.SyntaxKind.MethodDeclaration:
                 return exports.createMethod(member);
         }
@@ -85,10 +76,12 @@ exports.createConstructor = function (_a) {
     var _b = _a.decorators, decorators = _b === void 0 ? undefined : _b, _c = _a.modifiers, modifiers = _c === void 0 ? undefined : _c, _d = _a.parameters, parameters = _d === void 0 ? undefined : _d, _e = _a.body, body = _e === void 0 ? undefined : _e;
     return ts.createConstructor(decorators, modifiers, parameters, body);
 };
-exports.createProperty = function (params) { return ts.createProperty(exports.createDecorators(params), params.modifiers, params.name.text, (params.questionToken) ? ts.createToken(params.questionToken) : undefined, params.type, exports.createExpression(params.initializer)); };
+exports.createProperty = function (params) {
+    return ts.createProperty(exports.createDecorators(params), params.modifiers, params.name.text, (params.questionToken) ? ts.createToken(params.questionToken) : undefined, params.type, exports.createExpression(params.initializer));
+};
 exports.createExpression = function (node) {
     switch (node.kind) {
-        case ts.SyntaxKind.NumberKeyword:
+        case ts.SyntaxKind.NumericLiteral:
             return ts.createNumericLiteral(node.text);
         default:
             debugger;

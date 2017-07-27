@@ -12,17 +12,13 @@
                         "kind": 146,
                         "flags": 0,
                         "name": {
-                            "text": "test"
+                            "text": "ConsractorLiteralParameter"
                         },
                         "type": {
                             "flags": 0,
                             "kind": 136
-<<<<<<< HEAD
-                        }
-=======
                         },
                         "decorators": []
->>>>>>> 18bc6219f6b73a861324411da2520400f1953d4c
                     }
                 ]
             },
@@ -80,7 +76,7 @@
             {
                 "parameters": [
                     {
-                        "name": "test",
+                        "name": "ConsractorLiteralParameter",
                         "documentation": "",
                         "type": "string"
                     }

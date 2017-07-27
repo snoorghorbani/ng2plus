@@ -72,6 +72,9 @@ var Serializer = (function () {
                 return this.extractConstructor(node);
             case ts.SyntaxKind.NumericLiteral:
                 return this.extractNumericLiteral(node);
+            case ts.SyntaxKind.StringLiteral:
+                debugger;
+                return this.extractStringLiteral(node);
             case ts.SyntaxKind.MethodDeclaration:
                 return this.extractMethodDeclaration(node);
             case ts.SyntaxKind.Parameter:
@@ -241,6 +244,7 @@ var Serializer = (function () {
     };
     Serializer.prototype.extractConstructor = function (node) {
         var _this = this;
+        debugger;
         return {
             kind: node.kind,
             flags: node.flags,

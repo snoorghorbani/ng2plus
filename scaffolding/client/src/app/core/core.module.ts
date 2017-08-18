@@ -5,15 +5,14 @@ import { FulllayoutModule } from '../full-layout';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { RouterModule } from '@angular/router';
 
-import {coreDefinition} from '.'
+import { coreDefinition } from './core.global'
 
-import {
-        HeaderComponent,
-        MainMenuComponent,
-        SearchBoxComponent,
-        LogoContainerComponent,
-        FooterComponent
-} from './';
+import { HeaderComponent } from './dumb-components/header/header.component';
+import { MainMenuComponent } from './dumb-components/main-menu/main-menu.component';
+import { SearchBoxComponent } from './dumb-components/search-box/search-box.component';
+import { LogoContainerComponent } from './dumb-components/logo-container/logo-container.component';
+import { FooterComponent } from './dumb-components/footer/footer.component';
+
 
 @NgModule({
         imports: [

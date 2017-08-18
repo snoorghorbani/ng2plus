@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { coreDefinition } from '../..';
+import { coreDefinition } from '../../core.global';
 
 @Component({
   selector: 'app-footer',

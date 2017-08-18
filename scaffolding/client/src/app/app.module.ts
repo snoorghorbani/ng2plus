@@ -8,9 +8,12 @@ import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
-        AppDefinition,
+        AppDefinition
+} from './app.global';
+
+import {
         AppComponent
-} from '.';
+} from './app.component';
 
 import { DashboardModule } from './dashboard'
 import {

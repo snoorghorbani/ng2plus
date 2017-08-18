@@ -1,4 +1,4 @@
-export * from './core.global';
+// export * from './core.global';
 
 export * from './dumb-components/header/header.component';
 export * from './dumb-components/main-menu/main-menu.component';

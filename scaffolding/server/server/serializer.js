@@ -85,6 +85,9 @@ var Serializer = (function () {
                 return this.extractKeywordTypeNode(node);
             case ts.SyntaxKind.NumberKeyword:
                 return this.extractKeywordTypeNode(node);
+            // Token<SyntaxKind.AbstractKeyword> | Token<SyntaxKind.AsyncKeyword> | Token<SyntaxKind.ConstKeyword> | Token<SyntaxKind.DeclareKeyword> | Token<SyntaxKind.DefaultKeyword> | Token<SyntaxKind.ExportKeyword> | Token<SyntaxKind.PublicKeyword> | Token<SyntaxKind.PrivateKeyword> | Token<SyntaxKind.ProtectedKeyword> | Token<SyntaxKind.ReadonlyKeyword> | Token<SyntaxKind.StaticKeyword>
+            case ts.SyntaxKind.AbstractKeyword || ts.SyntaxKind.AsyncKeyword || ts.SyntaxKind.ConstKeyword || ts.SyntaxKind.DeclareKeyword || ts.SyntaxKind.DefaultKeyword:
+                return this.extractmodifier(node);
             default:
                 debugger;
         }
@@ -131,13 +134,15 @@ var Serializer = (function () {
         };
     };
     Serializer.prototype.extractParameterDeclaration = function (node) {
+        debugger;
         return {
             kind: node.kind,
             flags: node.flags,
             name: {
                 text: node.name.getText()
             },
-            type: this.extractByNodeKind(node.type),
+            // type: this.extractByNodeKind(node.type),
+            type: undefined,
             decorators: [],
             dotDotDotToken: undefined,
             initializer: undefined,
@@ -235,6 +240,13 @@ var Serializer = (function () {
             type: undefined
         };
     };
+    Serializer.prototype.extractStringLiteral = function (node) {
+        return {
+            kind: node.kind,
+            flags: node.flags,
+            text: node.text
+        };
+    };
     Serializer.prototype.extractNumericLiteral = function (node) {
         return {
             kind: node.kind,
@@ -248,7 +260,10 @@ var Serializer = (function () {
         return {
             kind: node.kind,
             flags: node.flags,
-            parameters: node.parameters.map(function (paramNode) { return _this.extractByNodeKind(paramNode); })
+            parameters: node.parameters.map(function (paramNode) { return _this.extractByNodeKind(paramNode); }),
+            decorators: node.decorators ? node.decorators.map(function (decoratorNode) { return _this.extractByNodeKind(decoratorNode); }) : [],
+            modifiers: node.modifiers ? node.modifiers.map(function (modifierNode) { return _this.extractByNodeKind(modifierNode); }) : [],
+            body: undefined
         };
     };
     Serializer.prototype.extractArrayLiteralExpression = function (node) {
@@ -288,6 +303,13 @@ var Serializer = (function () {
     /** True if this is visible outside this file, false otherwise */
     Serializer.prototype.isNodeExported = function (node) {
         return (node.flags & ts.NodeFlags.ExportContext) !== 0 || (node.parent && node.parent.kind === ts.SyntaxKind.SourceFile);
+    };
+    Serializer.prototype.extractmodifier = function (node) {
+        return {
+            // decorators: node.decorators.map(decoratorNode => this.extractByNodeKind(decoratorNode))
+            // TODO
+            decorators: []
+        };
     };
     return Serializer;
 }());

@@ -1,6 +1,6 @@
 import { Component, ViewChild, AfterViewInit, ElementRef, trigger, state, style, transition, animate } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { menuState } from "../../../full-layout";
+import { menuState } from "../../../full-layout/full-layout.service";
 import { FullLayoutService } from "../../../full-layout/full-layout.service";
 
 @Component({

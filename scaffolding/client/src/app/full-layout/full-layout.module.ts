@@ -6,9 +6,9 @@ import {
   RouteOutlets, LayoutModule
 } from '../infra';
 
-import { BaseComponent } from './';
+import { BaseComponent } from './dumb-components/base/base.component';
+import { FullLayoutService } from './full-layout.service';
 
-import { FullLayoutService } from '.';
 
 @NgModule({
   imports: [

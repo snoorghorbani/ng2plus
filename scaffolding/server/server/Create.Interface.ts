@@ -18,6 +18,9 @@ export interface CreateMethod {
 export interface CreateParameter {
     (params: I.ParameterDecleration): ts.ParameterDeclaration
 }
+export interface CreateParameters {
+    (params: I.ParameterDecleration[]): ts.ParameterDeclaration[]
+}
 
 export interface CreateProperty {
     (params: I.PropertyDecleration): ts.PropertyDeclaration
@@ -25,3 +28,7 @@ export interface CreateProperty {
 export interface createExpression {
     (node: I.Expression): ts.Expression
 }
+export interface createConstructor {
+    (params: I.ConstructorDeclaration): ts.ConstructorDeclaration
+}
+

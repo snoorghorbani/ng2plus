@@ -53,18 +53,14 @@ exports.createDecorator = function (_a) {
         argumentsArray: exports.createArguments(decorator.expression)
     }));
 };
-exports.createParameter = function (params) { return ts.createParameter(exports.createDecorators(params), params.modifiers, params.dotDotDotToken, params.name.text, params.questionToken, ts.createKeywordTypeNode(params.type.kind), params.initializer); };
+exports.createParameter = function (params) { return ts.createParameter(exports.createDecorators(params), params.modifiers, params.dotDotDotToken, params.name.text, params.questionToken, params.type ? ts.createKeywordTypeNode(params.type.kind) : undefined, params.initializer); };
+exports.createParameters = function (parameters) { return parameters.map(function (parameter) { return exports.createParameter(parameter); }); };
 exports.createClassElements = function (params) {
     return params.members.map(function (member) {
         switch (member.kind) {
             case ts.SyntaxKind.Constructor:
                 debugger;
-                return exports.createConstructor({
-                    decorators: undefined,
-                    modifiers: undefined,
-                    parameters: member.parameters.map(function (param) { return exports.createParameter(param); }),
-                    body: undefined
-                });
+                return exports.createConstructor(member);
             case ts.SyntaxKind.PropertyDeclaration:
                 return exports.createProperty(member);
             case ts.SyntaxKind.MethodDeclaration:
@@ -72,9 +68,14 @@ exports.createClassElements = function (params) {
         }
     });
 };
-exports.createConstructor = function (_a) {
-    var _b = _a.decorators, decorators = _b === void 0 ? undefined : _b, _c = _a.modifiers, modifiers = _c === void 0 ? undefined : _c, _d = _a.parameters, parameters = _d === void 0 ? undefined : _d, _e = _a.body, body = _e === void 0 ? undefined : _e;
-    return ts.createConstructor(decorators, modifiers, parameters, body);
+// export var createConstructor = function ({
+//      decorators = undefined, modifiers = undefined, parameters = undefined, body = undefined }
+//     : { decorators: any, modifiers: any, parameters: any, body: undefined }
+// ) {
+//     return ts.createConstructor(decorators, modifiers, parameters, body);
+// }
+exports.createConstructor = function (params) {
+    return ts.createConstructor(undefined, undefined, exports.createParameters(params.parameters), params.body);
 };
 exports.createProperty = function (params) {
     return ts.createProperty(exports.createDecorators(params), params.modifiers, params.name.text, (params.questionToken) ? ts.createToken(params.questionToken) : undefined, params.type, exports.createExpression(params.initializer));

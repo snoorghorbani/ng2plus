@@ -14,13 +14,11 @@
                         "name": {
                             "text": "ConsractorLiteralParameter"
                         },
-                        "type": {
-                            "flags": 0,
-                            "kind": 136
-                        },
                         "decorators": []
                     }
-                ]
+                ],
+                "decorators": [],
+                "modifiers": []
             },
             {
                 "kind": 149,
@@ -49,10 +47,6 @@
                         "name": {
                             "text": "param1"
                         },
-                        "type": {
-                            "flags": 0,
-                            "kind": 136
-                        },
                         "decorators": []
                     },
                     {
@@ -60,10 +54,6 @@
                         "flags": 0,
                         "name": {
                             "text": "param2"
-                        },
-                        "type": {
-                            "flags": 0,
-                            "kind": 133
                         },
                         "decorators": []
                     }

@@ -15,7 +15,8 @@ export interface extractedImportDecleration {
 }
 export interface visitResult {
     importDeclerations: any[];
-    classDecleration: Class
+    classDecleration: Class;
+    // type:any;
 }
 export interface importClause extends Node {
     name: string
@@ -59,8 +60,11 @@ export type Expression =
     | NumericLiteralDecleration
     | MethodDeclaration;
 
-export interface Constructor extends Node {
+export interface ConstructorDeclaration extends Node {
     parameters: ParameterDecleration[];
+    decorators:Decorator[];
+    modifiers:Modifier[],
+    body:any
 }
 export interface Initializer extends Node {
     // multiLine: boolean;
@@ -104,7 +108,7 @@ export interface Decorator extends Node {
     expression: Expression;
 }
 export interface Modifier {
-    decorators: ts.Modifier;
+    decorators: Decorator[];
 }
 export interface MethodDeclaration extends Node {
     name: Name;
@@ -121,4 +125,4 @@ export interface MethodDeclaration extends Node {
 export interface KeywordTypeNode extends Node {
 
 }
-export type ClassElement = Constructor | PropertyDecleration | MethodDeclaration;
+export type ClassElement = ConstructorDeclaration | PropertyDecleration | MethodDeclaration;

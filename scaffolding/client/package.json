@@ -1,5 +1,5 @@
 {
-  "name": "@ng2plus/scafollding/client",
+  "name": "@ng2plus/scafolldingclient",
   "version": "0.1.0",
   "scripts": {
     "build": "ng build",

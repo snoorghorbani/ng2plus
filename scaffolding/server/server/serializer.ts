@@ -80,7 +80,7 @@ export class Serializer {
             case ts.SyntaxKind.NumericLiteral:
                 return this.extractNumericLiteral(<ts.NumericLiteral>node);
             case ts.SyntaxKind.StringLiteral:
-            debugger;
+                debugger;
                 return this.extractStringLiteral(<ts.StringLiteral>node);
             case ts.SyntaxKind.MethodDeclaration:
                 return this.extractMethodDeclaration(<ts.MethodDeclaration>node);
@@ -92,6 +92,9 @@ export class Serializer {
                 return this.extractKeywordTypeNode(<ts.KeywordTypeNode>node);
             case ts.SyntaxKind.NumberKeyword:
                 return this.extractKeywordTypeNode(<ts.KeywordTypeNode>node);
+                // Token<SyntaxKind.AbstractKeyword> | Token<SyntaxKind.AsyncKeyword> | Token<SyntaxKind.ConstKeyword> | Token<SyntaxKind.DeclareKeyword> | Token<SyntaxKind.DefaultKeyword> | Token<SyntaxKind.ExportKeyword> | Token<SyntaxKind.PublicKeyword> | Token<SyntaxKind.PrivateKeyword> | Token<SyntaxKind.ProtectedKeyword> | Token<SyntaxKind.ReadonlyKeyword> | Token<SyntaxKind.StaticKeyword>
+            case ts.SyntaxKind.AbstractKeyword || ts.SyntaxKind.AsyncKeyword || ts.SyntaxKind.ConstKeyword || ts.SyntaxKind.DeclareKeyword || ts.SyntaxKind.DefaultKeyword:
+                return this.extractmodifier(<ts.Modifier>node);
             default:
                 debugger
         }
@@ -138,13 +141,15 @@ export class Serializer {
         }
     }
     extractParameterDeclaration(node: ts.ParameterDeclaration): I.ParameterDecleration {
+        debugger
         return {
             kind: node.kind,
             flags: node.flags,
             name: {
                 text: node.name.getText()
             },
-            type: this.extractByNodeKind(node.type),
+            // type: this.extractByNodeKind(node.type),
+            type:undefined,
             decorators: [],
             dotDotDotToken: undefined,
             initializer: undefined,
@@ -242,7 +247,13 @@ export class Serializer {
             type: undefined
         }
     }
-    extractStringLiteral(node:ts.StringLiteral):I.StringLiteralDecleration
+    extractStringLiteral(node: ts.StringLiteral): I.StringLiteralDecleration {
+        return {
+            kind: node.kind,
+            flags: node.flags,
+            text: node.text
+        }
+    }
     extractNumericLiteral(node: ts.NumericLiteral): I.NumericLiteralDecleration {
         return {
             kind: node.kind,
@@ -250,12 +261,15 @@ export class Serializer {
             text: node.text
         }
     }
-    extractConstructor(node: ts.ConstructorDeclaration): I.Constructor {
+    extractConstructor(node: ts.ConstructorDeclaration): I.ConstructorDeclaration {
         debugger;
         return {
             kind: node.kind,
             flags: node.flags,
-            parameters: node.parameters.map(paramNode => <I.ParameterDecleration>this.extractByNodeKind(paramNode))
+            parameters: node.parameters.map(paramNode => <I.ParameterDecleration>this.extractByNodeKind(paramNode)),
+            decorators: node.decorators ? node.decorators.map(decoratorNode => <I.Decorator>this.extractByNodeKind(decoratorNode)): [],
+            modifiers: node.modifiers ? node.modifiers.map(modifierNode => <I.Modifier>this.extractByNodeKind(modifierNode)):[],
+            body: undefined
         }
     }
     extractArrayLiteralExpression(node: ts.ArrayLiteralExpression): I.ArrayLiteralExpression {
@@ -293,5 +307,12 @@ export class Serializer {
     /** True if this is visible outside this file, false otherwise */
     isNodeExported(node: ts.Node): boolean {
         return (node.flags & ts.NodeFlags.ExportContext) !== 0 || (node.parent && node.parent.kind === ts.SyntaxKind.SourceFile);
+    }
+    extractmodifier(node: ts.Modifier): I.Modifier {
+        return {
+            // decorators: node.decorators.map(decoratorNode => this.extractByNodeKind(decoratorNode))
+            // TODO
+            decorators: []
+        }
     }
 }

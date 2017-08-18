@@ -70,21 +70,17 @@ export var createParameter: IC.CreateParameter = params => ts.createParameter(
     params.dotDotDotToken,
     params.name.text,
     params.questionToken,
-    ts.createKeywordTypeNode((params.type as ts.KeywordTypeNode).kind),
+    params.type ? ts.createKeywordTypeNode((params.type as ts.KeywordTypeNode).kind): undefined,
     params.initializer
 );
+export var createParameters: IC.CreateParameters = parameters => parameters.map(parameter => createParameter(parameter))
 
 export var createClassElements = function (params: { members: I.ClassElement[] }) {
     return params.members.map(member => {
         switch (member.kind) {
             case ts.SyntaxKind.Constructor:
                 debugger
-                return createConstructor({
-                    decorators: undefined,
-                    modifiers: undefined,
-                    parameters: (<I.Constructor>member).parameters.map(param => createParameter(<I.ParameterDecleration>param)),
-                    body: undefined,
-                });
+                return createConstructor(<I.ConstructorDeclaration>member);
             case ts.SyntaxKind.PropertyDeclaration:
                 return createProperty(<I.PropertyDecleration>member)
             case ts.SyntaxKind.MethodDeclaration:
@@ -92,21 +88,32 @@ export var createClassElements = function (params: { members: I.ClassElement[] }
         }
     })
 }
-export var createConstructor = function ({
-     decorators = undefined, modifiers = undefined, parameters = undefined, body = undefined }
-    : { decorators: any, modifiers: any, parameters: any, body: undefined }
-) {
-    return ts.createConstructor(decorators, modifiers, parameters, body);
+// export var createConstructor = function ({
+//      decorators = undefined, modifiers = undefined, parameters = undefined, body = undefined }
+//     : { decorators: any, modifiers: any, parameters: any, body: undefined }
+// ) {
+//     return ts.createConstructor(decorators, modifiers, parameters, body);
+// }
+
+export var createConstructor: IC.createConstructor = params => {
+    return ts.createConstructor(
+        undefined,
+        undefined,
+        createParameters(params.parameters),
+        params.body
+    )
 }
+
 export var createProperty: IC.CreateProperty = params => {
     return ts.createProperty(
-    createDecorators(params),
-    params.modifiers,
-    params.name.text,
-    (params.questionToken) ?  ts.createToken(params.questionToken) : undefined,
-    params.type,
-    createExpression(params.initializer)
-)};
+        createDecorators(params),
+        params.modifiers,
+        params.name.text,
+        (params.questionToken) ? ts.createToken(params.questionToken) : undefined,
+        params.type,
+        createExpression(params.initializer)
+    )
+};
 export var createExpression: IC.createExpression = node => {
     switch (node.kind) {
         case ts.SyntaxKind.NumericLiteral:

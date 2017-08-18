@@ -30,6 +30,7 @@ import {
                 CoreModule,
                 RouterModule.forRoot([]),
                 AppStoreModule,
+                DashboardModule
 
         ].concat(AppDefinition.imports),
         declarations: [

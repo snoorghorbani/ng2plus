@@ -3,13 +3,16 @@ import {
 } from './infra';
 
 import {
-    BaseComponent,
+    BaseComponent
+} from './full-layout/dumb-components/base/base.component';
+
+import {
     FulllayoutModule
-} from './full-layout';
+} from './full-layout/full-layout.module';
 
 import {
     MainMenuComponent,
-    UpperMenuComponent,
+    // UpperMenuComponent,
     SearchBoxComponent,
     FooterComponent,
     LogoContainerComponent
@@ -20,19 +23,19 @@ FulllayoutModule.routeOutlets
     //     component: UpperMenuComponent,
     //     outlet: FulllayoutModule.outlets.toolbar
     // })
-    // .add_outlet({
-    //     component: MainMenuComponent,
-    //     outlet: FulllayoutModule.outlets.menu
-    // })
+    .add_outlet({
+        component: MainMenuComponent,
+        outlet: FulllayoutModule.outlets.menu
+    })
     // .add_outlet({
     //     component: SearchBoxComponent,
     //     outlet: LargelayoutModule.outlets.search
     // })
-    // .add_outlet({
-    //     component: LogoContainerComponent,
-    //     outlet: FulllayoutModule.outlets.logo
-    // })
-    // .add_outlet({
-    //     component: FooterComponent,
-    //     outlet: FulllayoutModule.outlets.footer
-    // });
+    .add_outlet({
+        component: LogoContainerComponent,
+        outlet: FulllayoutModule.outlets.logo
+    })
+    .add_outlet({
+        component: FooterComponent,
+        outlet: FulllayoutModule.outlets.footer
+    });

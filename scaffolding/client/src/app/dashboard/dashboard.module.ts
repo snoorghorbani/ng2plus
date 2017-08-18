@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 // import {  } from '@angular/compiler';
 
-import { AppDefinition } from '..';
+import { AppDefinition } from '../app.global';
 import { SharedModule } from '../shared';
 
 import { dashboardDefinition, IndexComponent } from './';
